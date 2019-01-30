@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <button id="bt1">获取所有菜品</button>
+  <button id="bt2">获取某一道菜品</button>
+  <button id="bt3">添加菜品</button>
+  <button id="bt4">删除菜品</button>
+  <button id="bt5">修改菜品</button>
+  <script src="axios.min.js"></script>
+  <script>
+  bt1.onclick = function(){
+    axios.get('http://127.0.0.1:8090/admin/dish').then((res)=>{
+      console.log(res.data);
+    }).catch((err)=>{
+      console.log(err);
+    })
+  }
+  bt3.onclick = function(){
+    var data = {
+      title:'小烧饼',
+      imgUrl:'1234567.jpg',
+      price:35,
+      detail:'小烧饼的详细情况',
+      categoryId:3
+    }
+    axios.post('http://127.0.0.1:8090/admin/dish',data).then(res=>{
+      console.log(res.data);
+    }).catch(err=>{
+      console.log(err);
+    })
+  }
+  
+  </script>
+
+
+<hr>
+<button class="btn">0</button>
+<button class="btn">1</button>
+<button class="btn">2</button>
+<script>
+var btnList = document.querySelectorAll('.btn');
+//for(var i=0; i<btnList.length; i++){
+for(let i=0; i<btnList.length; i++){
+  console.log('创建一个单击监听函数...');
+  btnList[i].onclick = function(){
+    console.log(i);
+  }
+}
+// var data = new FormDate();
+// data.append('description',inputDesc.value);
+// data.append('dishImg',inputFile.file[0]);
+// axios.post('http://127.0.0.1:8090/admin/dish/image',data).then(res=>{
+//   consol.elog(res.data);
+// }).catch(err=>{
+//   console.log(err)
+// })
+//console.log('所有代码执行完成，i='+i);
+</script>
+
+<hr>
+<h3>文件上传</h3>
+<form action="http://127.0.0.1:8090/admin/dish/image" method="POST" enctype="multipart/form-data">
+  <input type="file" name="dishImg"><br>
+  <input type="text" name="description">
+  <input type="submit">
+</form>
+</body>
+</html>
